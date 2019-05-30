@@ -1,0 +1,22 @@
+TextField {
+	-fx-background-color: BEIGE;
+}
+
+BorderPane {
+	-fx-background-color: WHITE;	
+}
+
+VBox {
+	-fx-spacing: 10px;	
+	-fx-padding: 10 0 0 0;
+}
+
+ImageView {
+	-fx-padding: 0 0 100 0;	
+	-fx-spacing: 20px;
+}
+
+Button {
+	-fx-background-color: #80D3E8;
+	-fx-text-fill: WHITE;	
+}
