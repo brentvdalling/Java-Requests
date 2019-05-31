@@ -20,3 +20,16 @@ Button {
 	-fx-background-color: #80D3E8;
 	-fx-text-fill: WHITE;	
 }
+
+#nav {
+	-fx-background-color: WHITE;
+	-fx-text-fill: GREY;
+	-fx-border-width: 0 0 3 0; 
+	-fx-border-color: WHITE WHITE #E8E8E8 WHITE;
+	-fx-border-insets: 5px;
+}
+
+#nav:hover {
+	-fx-text-fill: #80D3E8;
+	-fx-border-width: 0 0 1 0;
+}

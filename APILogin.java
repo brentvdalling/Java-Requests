@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView; 
 import java.awt.*;
@@ -17,6 +18,10 @@ public class APILogin extends Application {
 	
 	static TextField username = new TextField();
 	static TextField password = new TextField();
+	
+	private User user = new User();
+	
+	public static Scene scene;
 	
 	
 	@Override
@@ -35,7 +40,7 @@ public class APILogin extends Application {
 		this.password.setPromptText("Password");
 		
 		button.setOnAction(e-> {
-			attemptLogin(username.getText(), password.getText());
+			attemptLogin(username.getText(), password.getText(), primaryStage);
 		});
 		
 		box.getChildren().addAll(image, username, password, button);
@@ -48,7 +53,7 @@ public class APILogin extends Application {
 		
 		
 		
-		Scene scene = new Scene(pane, 300, 250);
+		scene = new Scene(pane, 300, 250);
 		scene.getStylesheets().add("app.css");
 		primaryStage.setTitle("API Management"); // Set the stage title
 		primaryStage.setScene(scene); // Place the scene in the stage
@@ -56,7 +61,9 @@ public class APILogin extends Application {
 	}
 	
 	
-	public static void attemptLogin(String user, String pass) {
+	public static void attemptLogin(String user, String pass, Stage primaryStage) {
+		
+		//changeScene(1);
 				
 		Request request = new Request("http://ins.api.timelydevs.com");
 		
@@ -76,7 +83,7 @@ public class APILogin extends Application {
 			request.setTokenType(response.get("token_type"));
 			
 			if(request.getAccessToken() != null)
-				changeScene();
+				changeScene(primaryStage, request);
 			else {
 				showFail();
 			} 
@@ -93,8 +100,42 @@ public class APILogin extends Application {
 		password.setStyle("-fx-text-inner-color: red;");
 	}
 	
-	public static void changeScene() {
+	public static void changeScene(Stage primaryStage, Request request) {
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		BorderPane pane = new BorderPane();
+		HBox horizontalMenu = new HBox();
+		VBox verticalMenu = new VBox();
 		
+		Button user = new Button("User Details");
+		Button blog = new Button("Blog Management");
+		
+		user.setId("nav");
+		blog.setId("nav");
+		
+		horizontalMenu.getChildren().addAll(user, blog);
+		
+		pane.setCenter(horizontalMenu);
+		
+		System.out.println(request.get("/me", null));
+		
+		JSON response = new JSON(request.get("/me", null));
+		
+		user.setEmail(response.get("email"));
+		
+		System.out.println(user.getEmail());
+		
+		
+		TextField email = new TextField();
+		
+		
+		verticalMenu.getChildren().addAll(email);
+		
+		pane.getChildren().addAll(email);
+		
+		scene = new Scene(pane, screen.getWidth(), screen.getHeight());
+		scene.getStylesheets().add("app.css");
+		
+		primaryStage.setScene(scene);
 	}
 
     	

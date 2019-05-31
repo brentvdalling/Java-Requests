@@ -50,6 +50,8 @@ public class Request {
 					content.append(System.lineSeparator());
 				}
 			}
+			
+			con.disconnect();
 
 			return content.toString();
 
@@ -92,6 +94,8 @@ public class Request {
 					content.append(System.lineSeparator());
 				}
 			}
+			
+			con.disconnect();
 
 			return content.toString();
 
@@ -103,9 +107,15 @@ public class Request {
 	
 	public String get(String uri, String parameters) {
 		try {
+			
+					
 
-					URL myurl = new URL(url);
+					URL myurl = new URL(url + uri);
 					con = (HttpURLConnection) myurl.openConnection();
+					
+					con.setRequestProperty("User-Agent", "Java client");
+					con.setRequestProperty("Content-Type", "application/json");
+					con.setRequestProperty("Authorization", "Bearer " + this.getAccessToken());
 
 					con.setRequestMethod("GET");
 
@@ -122,6 +132,8 @@ public class Request {
 							content.append(System.lineSeparator());
 						}
 					}
+					
+					con.disconnect();
 
 					return content.toString();
 
