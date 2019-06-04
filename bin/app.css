@@ -1,0 +1,39 @@
+TextField {
+	-fx-background-color: BEIGE;
+}
+
+BorderPane {
+	-fx-background-color: WHITE;	
+}
+
+VBox {
+	-fx-spacing: 10px;	
+	-fx-padding: 10 0 0 0;
+}
+
+ImageView {
+	-fx-padding: 0 0 100 0;	
+	-fx-spacing: 20px;
+}
+
+Button {
+	-fx-background-color: #80D3E8;
+	-fx-text-fill: WHITE;	
+}
+
+#nav {
+	-fx-background-color: WHITE;
+	-fx-text-fill: GREY;
+	-fx-border-width: 0 0 3 0; 
+	-fx-border-color: WHITE WHITE #E8E8E8 WHITE;
+	-fx-border-insets: 5px;
+}
+
+#nav:hover {
+	-fx-text-fill: #80D3E8;
+	-fx-border-width: 0 0 1 0;
+}
+
+#submit {
+	-fx-width: 100%;
+}
